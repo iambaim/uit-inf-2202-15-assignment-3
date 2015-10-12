@@ -1,4 +1,5 @@
-# WordCount
+# WordCount 
+##### (by: Inge Alexander Raknes)
 
 This is an example project to demonstrate Spark and Scala on Amazon EMR.
 
