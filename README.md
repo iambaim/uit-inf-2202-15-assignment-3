@@ -1,8 +1,8 @@
 # Mandatory assignment 3 | inf-2202 | Fall 2015 
 
-Lars Ailo Bongo (larsab@cs.uit.no)
-Inge Alexander Raknes (inge.a.raknes@uit.no)
-Ibrahim Umar (ibrahim.umar@uit.no)
+Lars Ailo Bongo (larsab@cs.uit.no), 
+Inge Alexander Raknes (inge.a.raknes@uit.no). 
+Ibrahim Umar (ibrahim.umar@uit.no), and 
 inf-2202 fall 2015 students
 
 Department of Computer Science,
