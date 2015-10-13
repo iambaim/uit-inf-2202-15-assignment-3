@@ -22,6 +22,8 @@ This is an example project to demonstrate Spark and Scala on Amazon EMR.
 #### Get access key and secret access key
 Instructions: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-set-up.html#cli-signup
 
+**Hint:** Don't forget to assign policy to your newly created user. Click on the "Attach Policy" button under the "Permission" section and search for the appropriate policy types. For example, in order to successfully run the provided download script below, you must assign the S3 policy (read-only or full access) to your user.
+
 #### Install AWS cli tools
 Instructions: https://docs.aws.amazon.com/cli/latest/userguide/installing.html
 
@@ -109,3 +111,4 @@ Start a cluster on aws:
 3. Submit using the submit command in the previous section.
 For the input parameter, specify a globbed URI of public datasets, e.g. `'s3://aws-publicdatasets/common-crawl/crawl-data/CC-MAIN-2015-27/segments/*/wet/'`
 Remember the surrounding quotes around the globbed URI or else shell substitution will do funny things to it.
+
