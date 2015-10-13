@@ -19,7 +19,7 @@ object Main extends App {
   }
 
   val commands: Seq[(String, Command)] = Seq(
-    "word-count" -> new WordCount(new SparkContext(new SparkConf().setAppName("WordCount"))),
+    "word-count" -> new WordCount(new SparkContext(new SparkConf().setAppName("WordCount")))
     //Students: Add your collect-links call here 
     //Students: Add your page-rank call here
   )
