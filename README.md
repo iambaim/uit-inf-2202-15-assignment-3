@@ -23,18 +23,20 @@ This is an individual assignment, and hence you must submit an individual report
 UiT has an institution account at AWS. As a student, you will therefore receive $100 in free credit that you can use for this assignment.  To register at AWS do the following.
 
 First, create an AWS Account:
-1.	https://portal.aws.amazon.com/gp/aws/developer/registration/index.html
-2.	TODO: details
+
+1. https://portal.aws.amazon.com/gp/aws/developer/registration/index.html
+2. TODO: details
 
 Then register at AWS Educate:
+
 3.	https://aws.amazon.com/education/awseducate/
 4.	Chose: Apply for AWS Educate for Students
 5.	Select that You are a student
 6.	Fill in the form:
-	a.	Institution name is: University of Tromsø - The Arctic University of Norway
-	b.	Field of study is: Computer Science
-	c.	Email: must be your uit.no address
-	d.	Grade level is: Undergraduate – Intro Courses
+		a.	Institution name is: University of Tromsø - The Arctic University of Norway
+		b.	Field of study is: Computer Science
+		c.	Email: must be your uit.no address
+		d.	Grade level is: Undergraduate – Intro Courses
 7.	You will receive a confirmation email
 8.	Your account should have $100 in credit.
 
