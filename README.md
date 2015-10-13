@@ -1,9 +1,86 @@
-# WordCount 
-##### (by: Inge Alexander Raknes)
+# Mandatory assignment 3 | inf-2202 | Fall 2015 
 
-This is an example project to demonstrate Spark and Scala on Amazon EMR.
+Lars Ailo Bongo (larsab@cs.uit.no)
+Inge Alexander Raknes (inge.a.raknes@uit.no)
+Ibrahim Umar (ibrahim.umar@uit.no)
+inf-2202 fall 2015 students
 
-## Setup
+Department of Computer Science,
+University of Tromsø.
+
+## Introduction
+
+In this mandatory assignment, you will implement PageRank using Spark on Amazon Web Services (AWS), and use it to analyze data from the Common Crawl Corpus. PageRank is an algorithm used by Google to rank websites according to how many other websites link to it. Spark is becoming the de-facto standard for implementing such algorithms. AWS is a cloud platform that provides a way to execute Spark, and it has public large datasets such as the Common Crawl Corpus.
+
+**Note!** This is the first time we use Spark and AWS in a mandatory assignment. We therefore expect issues, discovery of useful resources, and changes to this document. Please contribute by sending emails and submitting issues.
+
+## Practicalities
+
+This is an individual assignment, and hence you must submit an individual report. As usual, the report and code is handed in using GitHub.
+
+## Amazon Web Services
+
+UiT has an institution account at AWS. As a student, you will therefore receive $100 in free credit that you can use for this assignment.  To register at AWS do the following.
+
+First, create an AWS Account:
+1.	https://portal.aws.amazon.com/gp/aws/developer/registration/index.html
+2.	TODO: details
+
+Then register at AWS Educate:
+3.	https://aws.amazon.com/education/awseducate/
+4.	Chose: Apply for AWS Educate for Students
+5.	Select that You are a student
+6.	Fill in the form:
+	a.	Institution name is: University of Tromsø - The Arctic University of Norway
+	b.	Field of study is: Computer Science
+	c.	Email: must be your uit.no address
+	d.	Grade level is: Undergraduate – Intro Courses
+7.	You will receive a confirmation email
+8.	Your account should have $100 in credit.
+
+Note that you have registered the account using your own private credit card. You are therefore responsible for all resource usage at AWS. If you use more than $100 worth of resources, you must pay for them.
+
+## Spark
+
+Spark is one of the natively supported data processing systems on Amazon Elastic MapReduce (EMR) web service. Some useful links are:
+* [Spark on EMR](http://aws.amazon.com/elasticmapreduce/details/spark/)
+* [EMR](http://aws.amazon.com/elasticmapreduce/)
+
+We will describe Spark in multiple lectures in the course. Additional useful resources are:
+* [Spark homepage](http://spark.apache.org/)
+* [Spark paper](http://people.csail.mit.edu/matei/papers/2010/hotcloud_spark.pdf)
+* [A more detailed paper](http://people.csail.mit.edu/matei/papers/2012/nsdi_spark.pdf)
+* Online lectures, books, exercise, more papers, and more: http://spark.apache.org/documentation.html
+
+You can run Spark on your own computer, uvrocks.cs.uit.no, and AWS. We recommend developing and testing code locally, and using AWS for testing your code on large datasets. Uvrocks is a small cluster where you can test Spark, and other systems in the Hadoop platform (for free).
+
+## PageRank
+
+PageRank is an often used algorithm for data-intensive computing, including in numerous the evaluation section in numerous academic papers. The algorithm is described in:
+* [Wikipedia](https://en.wikipedia.org/wiki/PageRank)
+* As a [technical report](http://ilpubs.stanford.edu:8090/422/1/1999-66.pdf)
+* In a [patent](http://www.google.com/patents/US6285999)
+* 
+PageRank has also been used to evaluate:
+* [Spark](http://people.csail.mit.edu/matei/papers/2012/nsdi_spark.pdf)
+* [GraphX](https://amplab.cs.berkeley.edu/wp-content/uploads/2014/02/graphx.pdf) (Spark library)
+
+## Common Crawl Corpus
+
+The [common crawl corpus](http://commoncrawl.org/) provides an open repository of web crawl data. This dataset is available as an [AWS Public Data Sets](https://aws.amazon.com/datasets/common-crawl-corpus/). (For more large scale public sets check: https://aws.amazon.com/datasets/). The current archive is 149TB in size and has 1.84 billion webpages, as described in this [blog post](http://blog.commoncrawl.org/2015/10/august-2015-crawl-archive-available/).
+
+You may not want to pay for processing the entire 149TB dataset. Instead, you need to find a reasonable sized subset of the data. In addition, you cannot download the data to your computer, but you need a test datasets to develop, test, and debug your code.
+
+If you want to learn more about web crawlers, then a popular open source crawler is [Nutch](http://nutch.apache.org/) (from which Hadoop has its roots).
+
+## Precode
+
+We provide precode in this repository that demonstrate Spark and Scala on Amazon EMR, and that you can use as a starting point for your project. This includes:
+* A Spark WordCount implementation (the Hello World of data-intensive programming).
+* A parser library for Common Crawl Archive files.
+* Scala build files.
+
+In addition, you can use the instructions below for running WordCount on Amazon EMR.
 
 ### Build environment
 
@@ -51,7 +128,6 @@ For example, the command `~unit:test` will automatically run all unit tests ever
 **NOTE:** The first time you build the project SBT will download the Scala compiler and other dependencies. This takes
 several minutes.
 
-
 ## Submit to Spark
 
 Compile:
@@ -67,7 +143,7 @@ Submit:
 
 ### PageRank
 
-PageRank is executed in the following steps
+Your PageRank may be is executed in the following steps
 
 1. Collect links from big data set
 
