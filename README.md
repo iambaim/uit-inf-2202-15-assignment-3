@@ -115,8 +115,10 @@ Instructions: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-
 
 ## Download some data
 
-A quick'n'dirty script for downloading a few GB of WARC/WET data can be found in `script/download.py` (requires *aws
+A quick'n'dirty script for downloading a few GB of WARC/WET data can be found in `script/download-{warc/wet}.py` (requires *aws
 cli tools* to be installed).
+
+For those without an AWS account can use the `script/download-{warc/wet}-https.py` scripts instead.
 
 ## Compile and test
 
