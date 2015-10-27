@@ -1,8 +1,8 @@
-# Mandatory assignment 3 | inf-2202 | Fall 2015 
+# Mandatory assignment 3 | inf-2202 | Fall 2015
 
-Lars Ailo Bongo (larsab@cs.uit.no), 
-Inge Alexander Raknes (inge.a.raknes@uit.no). 
-Ibrahim Umar (ibrahim.umar@uit.no), and 
+Lars Ailo Bongo (larsab@cs.uit.no),
+Inge Alexander Raknes (inge.a.raknes@uit.no).
+Ibrahim Umar (ibrahim.umar@uit.no), and
 inf-2202 fall 2015 students
 
 Department of Computer Science,
@@ -62,7 +62,7 @@ PageRank is an often used algorithm for data-intensive computing, including in n
 * [Wikipedia](https://en.wikipedia.org/wiki/PageRank)
 * As a [technical report](http://ilpubs.stanford.edu:8090/422/1/1999-66.pdf)
 * In a [patent](http://www.google.com/patents/US6285999)
-* 
+*
 PageRank has also been used to evaluate:
 * [Spark](http://people.csail.mit.edu/matei/papers/2012/nsdi_spark.pdf)
 * [GraphX](https://amplab.cs.berkeley.edu/wp-content/uploads/2014/02/graphx.pdf) (Spark library)
@@ -139,7 +139,7 @@ several minutes.
 Compile:
 
     sbt assembly
-    
+
 ### WordCount
 
 Submit:
@@ -160,14 +160,14 @@ The idea is that the input data for step 2 is significantly smaller than for ste
 #### Step 1: Collect links
 
     spark-submit --driver-memory 5G --executor-memory 2G target/scala-2.10/app.jar collect-links -i 'data/warc/*.gz' -o data/links.out
-    
+
 #### Step 2: Run PageRank
 
 
     spark-submit --driver-memory 10G --executor-memory 10G target/scala-2.10/app.jar page-rank -i data/links.out -o data/page-rank.out \
         --checkpoint-dir /tmp/checkpoint \
         --edge-partitions 1000
-    
+
 
 --edge-partitions: The number of partitions for the web graph edges. Should be significantly larger than the number of
 input partitions. If you get OutOfMemoryExceptions during runtime, try and adjust this parameter to a larger value.
@@ -185,10 +185,63 @@ Start a cluster on aws:
         --use-default-roles --ec2-attributes KeyName=INSERT-KEYNAME-HERE \
         --instance-groups InstanceGroupType=MASTER,InstanceType=c3.xlarge,InstanceCount=1,BidPrice=0.25 \
         InstanceGroupType=CORE,BidPrice=0.06,InstanceType=c3.xlarge,InstanceCount=5
-        
+
 1. Log into AWS web console for Amazon EMR to find SSH command
 2. SSH to master node
 3. Submit using the submit command in the previous section.
 For the input parameter, specify a globbed URI of public datasets, e.g. `'s3://aws-publicdatasets/common-crawl/crawl-data/CC-MAIN-2015-27/segments/*/wet/'`
 Remember the surrounding quotes around the globbed URI or else shell substitution will do funny things to it.
 
+# Quick start guide for the UVROCKS cluster
+Steps for running the wordcount pre-code on UVROCKS cluster (also should work on the lab machines — if you have enough space — and your local machine):
+```bash
+# BEGIN HERE AFTER LOGIN
+
+$ git clone <the assignment repository> assignment-3
+
+$ cd assignment-3
+
+
+# COMPILE WORDCOUNT USING SBT
+
+$ touch ~/.sbtconfig && echo "export SBT_OPTS=-XX:MaxPermSize=256M" >> ~/.sbtconfig && source ~/.sbtconfig
+
+$ /share/apps/bin/sbt assembly  ## Note: if this step failed you can always try again (also sbt on the lab machines is /depot/other/sbt, your local sbt might be different)
+
+
+# DOWNLOAD TEST DATA (FOR THOSE WITH AWS ACCOUNT CAN USE THE AWS VERSION OF THE SCRIPT BELOW AFTER A SUCCESSFUL AWS SETUP, SEE THE SCRIPT DIRECTORY ON THE GITHUB PAGE)
+
+$ mkdir data
+
+$ cd data
+
+$ python ../script/download-warc-https.py
+
+$ python ../script/download-wet-https.py
+
+$ cd ..
+
+
+# DOWNLOAD AND EXTRACT SPARK
+
+$ wget http://apache.uib.no/spark/spark-1.4.1/spark-1.4.1-bin-hadoop2.6.tgz
+
+$ tar -zxvf spark-1.4.1-bin-hadoop2.6.tgz
+
+
+# RUN WORDCOUNT
+
+$ spark-1.4.1-bin-hadoop2.6/bin/spark-submit target/scala-*/app.jar word-count -i data/ -o output/wordcount.txt
+
+
+# CHECK RESULTS
+
+$ more output/wordcount.txt/part-00000
+
+$ more output/wordcount.txt/part-00001
+
+
+#END
+```
+
+And… Done!
