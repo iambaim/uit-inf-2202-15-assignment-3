@@ -2,6 +2,10 @@ package no.uit.sfb.wordcount
 
 import net.liftweb.json._
 
+/**
+Example method for serializing a json dataset format into text
+**/
+
 object Json {
   implicit val formats = Serialization.formats(NoTypeHints)
 
