@@ -146,6 +146,7 @@ Submit:
 
     bin/spark-submit $project/target/scala-*/app.jar word-count -i /path/to/warc -o /save/output/here.txt
 
+**NOTE:** Don't forget to change $project to your project root directory
 
 ### PageRank
 
@@ -194,6 +195,9 @@ Remember the surrounding quotes around the globbed URI or else shell substitutio
 
 # Quick start guide for the UVROCKS cluster
 Steps for running the wordcount pre-code on UVROCKS cluster (also should work on the lab machines — if you have enough space — and your local machine):
+
+**NOTE:** The following is for local spark only (e.g., for experimenting you code). Please proceed forward for the guide on using uvrock's native cluster
+
 ```bash
 # BEGIN HERE AFTER LOGIN
 
@@ -243,5 +247,52 @@ $ more output/wordcount.txt/part-00001
 
 #END
 ```
+## TO RUN WITH UVROCKS'S NATIVE SPARK
+
+```bash
+# AFTER LOGIN, GO TO ANY WORKER NODE (PICK ANY NODE)
+
+$ /share/apps/bin/available-nodes.sh
+
+…
+compute-16-0.local
+…
+
+$ ssh compute-16-0.local 
+
+
+# UPLOAD TEST DATA TO YOU LOCAL HDFS ACCOUNT (REMEMBER TO CHANGE ‘abc123' TO YOUR LOGIN NAME)
+
+$ hdfs dfs -mkdir /user/abc123/data
+
+$ hdfs dfs -copyFromLocal /home/abc123/data/CC-MAIN-20150627033453-00250-ip-10-179-60-89.ec2.internal.warc.gz /user/abc123/data/
+
+$ hdfs dfs -ls data
+
+Found 1 items
+-rw-r--r--   3 user user 1086203558 2015-10-30 14:06 data/CC-MAIN-20150627033453-00250-ip-10-179-60-89.ec2.internal.warc.gz
+
+
+# RUN SPARK  (REMEMBER TO CHANGE ‘abc123' TO YOUR LOGIN NAME)
+
+$ cd assignment-3
+
+$ spark-submit --num-executors 5  target/scala-*/app.jar word-count -i hdfs:/user/abc123/data -o hdfs:/user/abc123/output/wc1
+
+
+# COPY BACK THE RESULT TO YOUR LOCAL STORAGE
+
+$ hdfs dfs -ls /user/abc123/output/wc1/
+
+Found 2 items
+-rw-r--r--   3 abc123 abc123          0 2015-10-30 14:20 /user/abc123/output/wc1/_SUCCESS
+-rw-r--r--   3 abc123 abc123  169611601 2015-10-30 14:20 /user/abc123/output/wc1/part-00000
+
+$ hdfs dfs -copyToLocal /user/abc123/output/wc1/part-00000 .
+
+
+#DONE
+```
+
 
 And… Done!
