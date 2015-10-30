@@ -78,6 +78,9 @@ $ aws emr create-cluster --name "Spark cluster" \
 
 #### Run your spark program
 
+1. Setup the aws cli: `aws configure`. Use the security credentials from the "Add User"
+steps above.
+
 1. Copy your assignment-3 files (including the compiled jar files) to the cluster (use the full command provided in your cluster SSH information page, below are just an example)
 ```terminal
 $ scp -r -i ~/Downloads/ACCESS.pem assignment-3/target/scala-* hadoop@ec2-54-111-11-111.compute-1.amazonaws.com:~/
